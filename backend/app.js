@@ -1,8 +1,16 @@
-const express = require('express');
+/********************************Start CONFIGURATIONS NODE JS , EXPRESS , MONGOOSE , bodyParser****************************/
+const express = require('express'); //cherche un module externe
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const sauceRoutes = require('./routes/sauce');
+const userRoutes = require ('./routes/user');
 
+mongoose.connect('mongodb+srv://samy:Bonjour@cluster0.z0zhl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 
@@ -14,31 +22,15 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+/********************************End CONFIGURATIONS NODE JS , EXPRESS , MONGOOSE , bodyParser****************************/
+//app.use('/api/auth/login', sauceRoutes);
+//app.use('/api/auth/signup', sauceRoutes);
+app.use('/api/auth/login', userRoutes);
+app.use('/api/auth/signup', userRoutes);
+app.use('/api/sauces', sauceRoutes);
+app.use('/api/sauces/:id', sauceRoutes);
+app.use('/api/sauces/:id/like', sauceRoutes);
 
-app.post('/api/auth/signup',(req, res, next) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: 'Objet créé !'
-  });
-});
 
-app.use((req, res, next) => {
-  console.log('Requête reçue !');
-  next();
-});
-
-app.use((req, res, next) => {
-  res.status(201);
-  next();
-}); 
-
-app.use((req, res, next) => {
-  res.json({ message: 'Votre requête a bien été reçue !'});
-  next();
-});
-
-app.use((req, res) => {
-  console.log('Réponse envoyée avec succès !');
-});
 
 module.exports = app;
