@@ -26,4 +26,4 @@ thingSchema.find({ _id : Id })
 
 thingSchema.find({ manufacturer: "Heintz" , likes: { $gte: 3 } , dislikes: 4 }) //méthode filter
 
-thingSchema.findById(Id)*/
+thingSchema.findById(Id)*/      

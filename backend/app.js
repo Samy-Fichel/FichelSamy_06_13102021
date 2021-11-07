@@ -2,6 +2,7 @@
 const express = require('express'); //cherche un module externe
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
@@ -16,22 +17,20 @@ mongoose.connect('mongodb+srv://samy:Bonjour@cluster0.z0zhl.mongodb.net/myFirstD
 
 const app = express();
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
-});
+});*/
+app.use(cors());
 
 app.use(bodyParser.json());
 /********************************End CONFIGURATIONS NODE JS , EXPRESS , MONGOOSE , bodyParser****************************/
 //app.use('/api/auth/login', sauceRoutes);
 //app.use('/api/auth/signup', sauceRoutes);
-app.use('/api/auth/login', userRoutes);
-app.use('/api/auth/signup', userRoutes);
-app.use('/api/sauces', sauceRoutes);
-app.use('/api/sauces/:id', sauceRoutes);
-app.use('/api/sauces/:id/like', sauceRoutes);
+app.use('/api/auth/', userRoutes);
+app.use('/api/sauces/', sauceRoutes);
 
 
 

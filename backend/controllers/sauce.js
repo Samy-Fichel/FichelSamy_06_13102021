@@ -1,7 +1,6 @@
 const Thing = require('../models/thing');
 
-exports.createThing = (req, res, next) => {
-
+exports.createThing = (req, res, next) => { //createSauces
   res.status(201).json({ message: 'Objet enregistré !' })
 };
 
@@ -23,7 +22,9 @@ exports.getOneThing = (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 };
 
+
 exports.getAllThings = (req, res, next) => {
+  console.log('Je suis une sauce');
   Thing.find()
     .then(things => res.status(200).json(things))
     .catch(error => res.status(400).json({ error }));
