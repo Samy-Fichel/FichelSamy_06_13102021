@@ -27,11 +27,8 @@ app.use(cors());
 
 app.use(bodyParser.json());
 /********************************End CONFIGURATIONS NODE JS , EXPRESS , MONGOOSE , bodyParser****************************/
-//app.use('/api/auth/login', sauceRoutes);
-//app.use('/api/auth/signup', sauceRoutes);
 app.use('/api/auth/', userRoutes);
 app.use('/api/sauces/', sauceRoutes);
-
 
 
 module.exports = app;
