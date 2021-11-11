@@ -1,33 +1,41 @@
-const sauceController = require('../models/saucemdl');
+const Sauce = require('../models/saucemdl');
 
-exports.createsauceController = (req, res, next) => { //createSauces
+exports.createSauce = (req, res, next) => { //createSauces
+  // Vérifier que le req.body.sauce est existant si non retourne une erreur 
+  const newSauce = new Sauce(JSON.parse (req.body.sauce));
+  newSauce.save(function (error) {
+    if (error) { 
+      res.status(500).json({ error })
+    }else{
+      res.status(201).json({ message: 'Objet enregistré !' })
+    }
+    
+  });
 
-  res.status(201).json({ message: 'Objet enregistré !' })
-  
 };
 
-exports.modifysauceController = (req, res, next) => {
-  sauceController.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+exports.modifySauce = (req, res, next) => {
+  Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet modifié !' }))
     .catch(error => res.status(400).json({ error }));
 };
 
-exports.deletesauceController = (req, res, next) => {
-  sauceController.deleteOne({ _id: req.params.id })
+exports.deleteSauce = (req, res, next) => {
+  Sauce.deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet supprimé ! ' }))
     .catch(error => res.status(400).json({ error }));
 };
 
-exports.getOnesauceController = (req, res, next) => {
-  sauceController.findOne({ _id: req.params.id })
-    .then(sauceController => res.status(200).json(sauceController))
+exports.getOneSauce = (req, res, next) => {
+  Sauce.findOne({ _id: req.params.id })
+    .then(sauce => res.status(200).json(sauce))
     .catch(error => res.status(404).json({ error }));
 };
 
 
-exports.getAllSaucesControllers = (req, res, next) => {
+exports.getAllSauces = (req, res, next) => {
   console.log('Je suis une sauce');
-  sauceController.find()
+  Sauce.find()
     .then(sauces => res.status(200).json(sauces))
     .catch(error => res.status(400).json({ error }));
 };
