@@ -2,6 +2,7 @@
 const express = require('express'); //cherche un module externe
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 
 const sauceRoutes = require('./routes/sauce');
@@ -26,6 +27,10 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
 /********************************End CONFIGURATIONS NODE JS , EXPRESS , MONGOOSE , bodyParser****************************/
 app.use('/api/auth/', userRoutes);
 app.use('/api/sauces/', sauceRoutes);
