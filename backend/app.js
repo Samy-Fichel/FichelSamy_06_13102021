@@ -4,11 +4,16 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
+//const helmet = require("helmet");
+//Importaton du package pour utiliser les variables d'environnement .env
+const dotenv = require("dotenv");
+const result = dotenv.config();
+
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://samy:Bonjour@cluster0.z0zhl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.z0zhl.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -30,6 +35,7 @@ app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+//app.use(helmet());
 
 /********************************End CONFIGURATIONS NODE JS , EXPRESS , MONGOOSE , bodyParser****************************/
 app.use('/api/auth/', userRoutes);

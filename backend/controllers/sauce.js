@@ -23,7 +23,7 @@ exports.modifySauce = (req, res, next) => {
   } : { ...req.body };
   console.log(sauceObject, 'sauce');
   Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Objet modifié !' }))
+    .then(() => res.status(200).json({ message: 'Sauce modifié !' }))
     .catch(error => res.status(400).json({ error }));
 };
 
@@ -33,7 +33,7 @@ exports.deleteSauce = (req, res, next) => {
   const sauceLike = req.body.like // body payload*/
 
   Sauce.findOne({ _id: req.params.id })
-  .then(sauce =>{
+  .then(sauce => {
     const filename = sauce.imageUrl.split('/images/')[1];
     fs.unlink(`images/${filename}`, () => {
       Sauce.deleteOne({ _id: req.params.id })
@@ -67,11 +67,24 @@ if (req.body.like == 1){
   Sauce.findOne({ _id: req.params.samy })
   .then((sauce) => {
     sauce.likes = sauce.likes+1;
+    //sauce.dislikes = sauce.dislikes-1;
+    sauce.save();
+    res.status(200).json({ message: 'Ok' });
+  })
+  .catch(error => res.status(500).json({ error }));
+}
+res.status(200).json({ message: 'OK like ! ' });
+
+
+if (req.body.like == 1){
+  Sauce.findOne({ _id: req.params.samy })
+  .then((sauce) => {
     sauce.dislikes = sauce.dislikes-1;
     sauce.save();
     res.status(200).json({ message: 'Ok' });
   })
-  .catch()
+  .catch(error => res.status(500).json({ error }));
 }
-res.status(200).json({ message: 'OK like ! ' });
+res.status(200).json({ message: 'OK Dislike ! ' });
 };
+
