@@ -19,7 +19,7 @@ router.get('/', auth, sauceCtrl.getAllSauces);
 /************ START ROUTE POST **********************************************/
 /*router.post('/',);*/
 
-router.post('/', (req, res, next) => {
+/*router.post('/', (req, res, next) => {
   console.log(req.body);
   if (req.body.password && req.body.password.length > 1) {
     res.status(201).json({
