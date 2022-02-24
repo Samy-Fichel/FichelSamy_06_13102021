@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const helmet = require("helmet");
+const rateLimit = require("./middleware/rate-limit");
 //Importaton du package pour utiliser les variables d'environnement .env
 const dotenv = require("dotenv");
 const result = dotenv.config();
@@ -29,6 +30,7 @@ const app = express();
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });*/
+app.use(rateLimit);
 app.use(helmet());
 app.use(cors());
 
