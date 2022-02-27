@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv').config();
 
 module.exports = (req, res, next) => {
     try {
@@ -8,6 +9,7 @@ module.exports = (req, res, next) => {
         if (req.body.userId && req.body.userId !== userId) {
             throw 'User ID non valable !';
         } else {
+            console.log(req.body.userId);
             next();
         }
     } catch (error) {
