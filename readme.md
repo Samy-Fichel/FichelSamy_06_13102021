@@ -26,22 +26,22 @@ Créer une base de données avec MongoDB ou autre, puis modifier le fichier .env
 
 Ouvrir un terminal sur le chemin du dossier backend 
 
-Exécuter la commande ` $ npm install -g nodemon` afin de charger le package nodemon
+Exécuter la commande `npm install -g nodemon` afin de charger le package nodemon
 
-Démarrer le serveur avec la commande `$ nodemon server` sur le dossier backend
+Démarrer le serveur avec la commande `nodemon server` sur le dossier backend
 
-Si le serveur ne démarre pas ré éxécuter la commande `$ npm install` puis relancer la commande `$ nodemon server` afin de démarrer le serveur
+Si le serveur ne démarre pas ré éxécuter la commande `npm install` puis relancer la commande `nodemon server` afin de démarrer le serveur
 
 
 ## Etape n°4 : / front-end ##
 
 Ouvrir un terminal sur le chemin du dossier front-end
 
-Exécuter la commande `$ npm install ` sur le dossier front-end afin d'y installer les dépendances
+Exécuter la commande `npm install ` sur le dossier front-end afin d'y installer les dépendances
 
-Exécuter la commande `$ npm install node-sass` afin d'y installer sass
+Exécuter la commande `npm install node-sass` afin d'y installer sass
 
-Démarrer le serveur front-end avec la commande `$ npm run start`
+Démarrer le serveur front-end avec la commande `npm run start`
 
 ### Connectez-vous à l’url suivant : http://127.0.0.1:8081/ ###
 
