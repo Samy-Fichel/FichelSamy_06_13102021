@@ -4,7 +4,7 @@ const User = require('../models/User');
 //
 
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)         //Fonction pour cryptée un MDP 
+    bcrypt.hash(req.body.password, 10) //Fonction pour crypter un MDP 
         .then(hash => {
             const user = new User({
                 email: req.body.email,
@@ -18,13 +18,12 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-    console.log("Je suis dans la requête login");
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé ! ' });
             }
-            bcrypt.compare(req.body.password, user.password)  // compare le MDP qui et envoyé avec la requete 
+            bcrypt.compare(req.body.password, user.password)  // compare le MDP qui est envoyé avec la requête
                 .then(valid => {
                     if (!valid) {
                         return res.status(401).json({ error: 'Mot de passe incorrect ! ' });
@@ -39,12 +38,10 @@ exports.login = (req, res, next) => {
                     });
                 })
                 .catch(error => {
-                  console.log("erreur bcrypt", error);
-                  res.status(500).json({ error });
-                }); 
+                    res.status(500).json({ error });
+                });
         })
         .catch(error => {
-            console.log("erreur finduser", error);
             res.status(500).json({ error });
-          }); 
+        });
 };

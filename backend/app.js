@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require("helmet");
 const rateLimit = require("./middleware/rate-limit");
-//Importaton du package pour utiliser les variables d'environnement .env
+//Importation du package pour utiliser les variables d'environnement .env
 const dotenv = require("dotenv");
 const result = dotenv.config();
 
@@ -24,12 +24,6 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
 
 const app = express();
 
-/*app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  next();
-});*/
 app.use(rateLimit);
 app.use(helmet());
 app.use(cors());
