@@ -6,7 +6,7 @@ const passwordSchema = new passwordValidator();
 
 //Schéma qui doit respecter la nomenclature du mot de passe
 passwordSchema
-.is().min(5)                                    // Minimum length 6
+.is().min(5)                                    // Minimum length 5
 .is().max(100)                                  // Maximum length 100
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
