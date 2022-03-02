@@ -19,4 +19,4 @@ const storage = multer.diskStorage({ //enregistré sur le disk
     }
 })
 
-module.exports = multer({ storage }).single('image')    // single fichier unique et non pas un groupe de fichiers 
+module.exports = multer({ storage }).single('image');    // single fichier unique et non pas un groupe de fichiers 
